@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -13,7 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('posts.index');
+        $posts = Post::latest()->get();
+        return view('posts.index', [
+            'posts' => $posts,
+        ]);
     }
 
     /**
@@ -23,7 +27,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        
+        return view('posts.create');
     }
 
     /**
@@ -36,10 +40,12 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => ['required'],
-            'body' => ['required']
+            'content' => ['required']
         ]);
+        
+        Post::create($request->all());
 
-        return $request->all();
+        return redirect()->route('posts.index')->with('success', 'Se ha creado correctamente un post');
     }
 
     /**
@@ -59,9 +65,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -71,9 +78,12 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,Post $post)
     {
-        //
+        $post->update($request->all());
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Publicacion actualizada correctamente');
     }
 
     /**
