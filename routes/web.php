@@ -18,10 +18,10 @@ use App\Http\Controllers\PostController;
     return view('welcome');
 });*/
 Route::get('/', [UserController::class, "index"]);
-Route::get('/posts', [PostController::class, 'index'])->name('posts');
-Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
-Route::post('/posts', [PostController::class, 'store'])->name('post.store');
-
+// Route::get('/posts', [PostController::class, 'index'])->name('posts');
+// Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
+// Route::post('/posts', [PostController::class, 'store'])->name('post.store');
+Route::resource('/posts', PostController::class);
 /*Auth::routes();*/
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

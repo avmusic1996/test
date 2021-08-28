@@ -9,11 +9,33 @@
     
 </head>
 <body>
+    
     <div class="container">
         <div class="row">
-            <div class="col-6 mx-auto">
-                <h1>publicaciones</h1>
-                
+            <div class="col-8 mx-auto">
+
+                <div class="text-center  p-6">
+                    <h1>Publicaciones</h1>
+                </div>
+                <div class="text-right">
+                    <a class="btn btn-primary" href="{{ route('posts.create') }}"> Crear</a>
+                </div>
+                <table class="table table-striped ">
+                    <thead>
+                      <tr class="g-3">
+                        <th scope="col">Titulos</th>
+                        <th scope="col">Contenido</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($posts as $posts)
+                      <tr>
+                        <td>{{ $posts->title }}</td>
+                        <td>{{ $posts->content }}</td>
+                      </tr>
+                      @endforeach
+                    </tbody>
+                  </table>
             </div>
         </div>
     </div>
