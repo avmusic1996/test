@@ -22,7 +22,7 @@
                     </div>
                     @endif
                     
-                    <form action="{{ route('posts.update', ['post' => $post->id ]) }}" method="POST">
+                    <form action="{{ route('posts.update', ['post' => $post ]) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <div class="form-group row">
