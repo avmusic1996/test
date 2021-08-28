@@ -13,6 +13,14 @@
             <div class="card">
                 <div class="card-header">{{ __('post') }}</div>
                 <div class="card-body">
+                    @if($errors->any())
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                            {{ $error }} </br>
+                    @endforeach
+                    
+                    </div>
+        @endif
                     <form action="{{ route('posts.store') }}" method="POST">
                         @csrf
                         <div class="form-group row">
@@ -26,7 +34,7 @@
                             <label for="body" class="col-md-4 col-form-label text-md-right">{{ __('Contenido') }}</label>
 
                             <div class="col-md-6">
-                                <textarea name="content" id="body" cols="40" rows="5">{{ old('body')}}</textarea> 
+                                <textarea name="content" id="body" cols="40" rows="5">{{ old('content')}}</textarea> 
                             </div>
                         </div>
                         <div class="form-group row mb-0">
