@@ -27,7 +27,14 @@
                 <tr>
                 <td>{{ $post->title }}</td>
                 <td>{{ $post->content }}</td>
-                <td><a href="{{ route('posts.edit', ['post' => $post] ) }}">editar</a></td>
+                <td><a href="{{ route('posts.edit', ['post' => $post] ) }}" class="btn btn-warning">Editar</a></td>
+                <td>
+                    <form action="{{ route('posts.destroy', ['post' => $post] ) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="submit" onclick=" return confirm('En verdad deseas borrar?');" class="btn btn-danger" value="eliminar"></a>
+                    </form>
+                </td>
                 </tr>
                 @endforeach
             </tbody>
